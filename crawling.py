@@ -17,10 +17,8 @@ def extract_text_and_images(url):
     text_list = []
     if divs:
         for div in divs:
-            if text := div.get_text().strip():
-                text = '\n'.join(
-                    line.strip() for line in text.splitlines() if line.strip())  # Remove blank space between paragraphs
-                text_list.append(text)
+            text = div.get_text()
+            text_list.append(text)
 
     # Extract image URLs
     image_urls = []
