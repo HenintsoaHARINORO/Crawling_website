@@ -16,12 +16,14 @@ def extract_text_and_images(url):
     pictures = soup.find_all("picture")
 
     # Extract text
-    text_list = []
+    text_set = set()
     if all_tags:
         for div in all_tags:
             text = div.get_text()
-            text_list.append(text)
+            sentences = [sentence.strip() for sentence in text.split('.') if sentence.strip()]
+            text_set.update(sentences)
 
+    text_list = list(text_set)
     # Extract image URLs
     image_urls = []
     if all_tags:
