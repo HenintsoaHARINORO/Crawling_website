@@ -10,20 +10,22 @@ def extract_text_and_images(url):
     # Create a BeautifulSoup object to parse the HTML content
     soup = BeautifulSoup(response.text, "html.parser")
 
-    divs = soup.find_all("div", attrs={"role": "region"})
+    # divs = soup.find_all("div", attrs={"role": "region"})
+    all_tags = soup.find_all(["div", "h1", "h2", "p"])
+
     pictures = soup.find_all("picture")
 
     # Extract text
     text_list = []
-    if divs:
-        for div in divs:
+    if all_tags:
+        for div in all_tags:
             text = div.get_text()
             text_list.append(text)
 
     # Extract image URLs
     image_urls = []
-    if divs:
-        for div in divs:
+    if all_tags:
+        for div in all_tags:
             images = div.find_all("img")
             for img in images:
                 img_url = img["src"]
