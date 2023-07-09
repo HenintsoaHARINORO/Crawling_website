@@ -18,17 +18,18 @@ def extract_text_and_images(url):
     # Extract text
     text_set = set()
     if all_tags:
-        for div in all_tags:
-            text = div.get_text()
+        for element in all_tags:
+            text = element.get_text()
             sentences = [sentence.strip() for sentence in text.split('.') if sentence.strip()]
             text_set.update(sentences)
 
     text_list = list(text_set)
     # Extract image URLs
     image_urls = []
+
     if all_tags:
-        for div in all_tags:
-            images = div.find_all("img")
+        for element in all_tags:
+            images = element.find_all("img")
             for img in images:
                 img_url = img["src"]
                 image_urls.append(img_url)
